@@ -1,0 +1,10 @@
+Admin:
+
+Username: admin
+Email: local@localmail.net
+Password: qwertyuiop
+
+
+Users:
+
+users have the same password as the admin
