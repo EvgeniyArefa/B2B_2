@@ -1,0 +1,4 @@
+*.sqlite
+/B2B/__pycache__/
+/agreement/__pycache__/
+/agreement/migrations/__pycache__/
