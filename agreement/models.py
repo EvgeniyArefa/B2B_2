@@ -40,8 +40,10 @@ class Agreement(models.Model):
     debit_turnover = models.FloatField(blank=True, default=0)
 
     def __str__(self):
-        return (str(self.data_start) + '/' + str(self.data_end) + '/' +
-            str(self.id) + '/' + str(self.company))
+        return (
+            str(self.data_start) + '/' + str(self.data_end) + '/' +
+            str(self.id) + '/' + str(self.company)
+            )
 
 
 class Period(models.Model):
@@ -52,5 +54,7 @@ class Period(models.Model):
     agreement = models.ForeignKey(Agreement, on_delete=models.CASCADE)
 
     def __str__(self):
-        return (str(self.data_start) + '/' + str(self.data_end) + '/' +
-            str(self.agreement.id))
+        return (
+            str(self.data_start) + '/' + str(self.data_end) + '/' +
+            str(self.agreement.id)
+            )

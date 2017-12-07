@@ -11,8 +11,9 @@ class AgreementForm(forms.ModelForm):
         start_date = self.cleaned_data.get('data_start')
         end_date = self.cleaned_data.get('data_end')
         if start_date > end_date:
-            raise forms.ValidationError('The end date must be later than' +
-                ' the start date')
+            raise forms.ValidationError(
+                'The end date must be later than the start date'
+                )
         return self.cleaned_data
 
 
@@ -23,8 +24,9 @@ class PeriodForm(forms.ModelForm):
         start_date = self.cleaned_data.get('data_start')
         end_date = self.cleaned_data.get('data_end')
         if start_date > end_date:
-            raise forms.ValidationError('The end date must be later than' +
-                ' the start date')
+            raise forms.ValidationError(
+                'The end date must be later than the start date'
+                )
 
         # Verification: the dates of the period should not exceed the dates
         # of the agreement
@@ -32,12 +34,16 @@ class PeriodForm(forms.ModelForm):
         agr_str = str(agreement)
         if (datetime.datetime.strptime(agr_str[0:10], '%Y-%m-%d').date() >
                 start_date):
-            raise forms.ValidationError('The beginning of the period must' +
-                ' be after the start of the agreement')
+            raise forms.ValidationError(
+                'The beginning of the period mustbe after the start of' +
+                'the agreement'
+                )
         if (datetime.datetime.strptime(agr_str[11:21], '%Y-%m-%d').date() <
                 end_date):
-            raise forms.ValidationError('The end of the period must be' +
-                ' before the end of the agreement')
+            raise forms.ValidationError(
+                'The end of the period must be before the end of the' +
+                ' agreement'
+                )
 
         # Verification: the dates of periods should not overlap with each
         # other in one agreement
@@ -57,8 +63,9 @@ class PeriodForm(forms.ModelForm):
                 '%Y-%m-%d').date()
             if not (end_date < select_start_date or start_date >
                     select_end_date):
-                raise forms.ValidationError('Overlapping periods in one' +
-                    ' agreement')
+                raise forms.ValidationError(
+                    'Overlapping periods in one agreement'
+                    )
         return self.cleaned_data
 
 
@@ -96,8 +103,10 @@ class AgreementAdmin(admin.ModelAdmin):
     inlines = [
         PeriodInline,
     ]
-    list_display = ('company', 'data_start', 'data_end', 'negotiator',
-        'loan_turnover', 'debit_turnover')
+    list_display = (
+        'company', 'data_start', 'data_end', 'negotiator', 'loan_turnover',
+        'debit_turnover'
+        )
     list_filter = ['company', 'data_start', 'data_end', 'negotiator']
     search_fields = ['company', 'negotiator']
     date_hierarchy = 'data_end'

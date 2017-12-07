@@ -20,24 +20,24 @@ def calendar(request, country=0, negotiator=0, company=0):
     try:
         if 'country' in request.GET:
             country = (request.GET['country']).split(',')
-            agreements_all = agreements_all.filter(company__country__in=
-                country).only('id')
+            agreements_all = agreements_all.filter(
+                company__country__in=country).only('id')
         if 'negotiator' in request.GET:
             negotiator = (request.GET['negotiator']).split(',')
-            agreements_all = agreements_all.filter(negotiator__id__in=
-                negotiator).only('id')
+            agreements_all = agreements_all.filter(
+                negotiator__id__in=negotiator).only('id')
         if 'company' in request.GET:
             company = (request.GET['company']).split(',')
-            agreements_all = agreements_all.filter(company__id__in=
-                company).only('id')
+            agreements_all = agreements_all.filter(
+                company__id__in=company).only('id')
     except ValueError:
         context = {
             'mes_er': 'You made a mistake when entering the code',
         }
         return render(request, 'agreement/mistake.html', context)
 
-    sel_periods = list(Period.objects.filter(agreement__id__in=
-        agreements_all))
+    sel_periods = list(Period.objects.filter(
+        agreement__id__in=agreements_all))
     select = 0
     mas_year = 0
     mas_month = 0
@@ -56,8 +56,10 @@ def calendar(request, country=0, negotiator=0, company=0):
             mas_month = 0
         if int(mass[11:15]) > mas_year:
             mas_year = int(mass[11:15])
-        if int(mass[16:18]) > mas_month:
             mas_month = int(mass[16:18])
+        elif int(mass[11:15]) == mas_year:
+            if int(mass[16:18]) > mas_month:
+                mas_month = int(mass[16:18])
     year = answer.get(mas_year, 0)
     if mas_year:
         if not year:
