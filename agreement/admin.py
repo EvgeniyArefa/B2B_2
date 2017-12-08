@@ -57,10 +57,10 @@ class PeriodForm(forms.ModelForm):
         select_periods = Period.objects.filter(agreement__id=int(agr_id))
         for i in range(len(select_periods)):
             period = str(select_periods[i])
-            select_start_date = datetime.datetime.strptime(period[0:10],
-                '%Y-%m-%d').date()
-            select_end_date = datetime.datetime.strptime(period[11:21],
-                '%Y-%m-%d').date()
+            select_start_date = datetime.datetime.strptime(
+                period[0:10], '%Y-%m-%d').date()
+            select_end_date = datetime.datetime.strptime(
+                period[11:21], '%Y-%m-%d').date()
             if not (end_date < select_start_date or start_date >
                     select_end_date):
                 raise forms.ValidationError(

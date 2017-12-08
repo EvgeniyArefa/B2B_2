@@ -19,7 +19,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Agreement',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('data_start', models.DateField()),
                 ('data_end', models.DateField()),
                 ('loan_turnover', models.FloatField(blank=True, default=0)),
@@ -29,7 +31,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Company',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
             ],
             options={
@@ -39,7 +43,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Country',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
                 ('code', models.CharField(max_length=3)),
             ],
@@ -50,33 +56,49 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Negotiator',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
+                ('name', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Period',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('data_start', models.DateField()),
                 ('data_end', models.DateField()),
-                ('status', models.IntegerField(choices=[(1, 'New'), (2, 'Active'), (3, 'Reconciliation'), (4, 'Closed')])),
-                ('agreement', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='agreement.Agreement')),
+                ('status', models.IntegerField(choices=[
+                    (1, 'New'), (2, 'Active'), (3, 'Reconciliation'),
+                    (4, 'Closed')])),
+                ('agreement', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='agreement.Agreement')),
             ],
         ),
         migrations.AddField(
             model_name='company',
             name='country',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='agreement.Country'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='agreement.Country'),
         ),
         migrations.AddField(
             model_name='agreement',
             name='company',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='agreement.Company'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='agreement.Company'),
         ),
         migrations.AddField(
             model_name='agreement',
             name='negotiator',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='agreement.Negotiator'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='agreement.Negotiator'),
         ),
     ]
