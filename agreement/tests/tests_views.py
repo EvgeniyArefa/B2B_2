@@ -1,6 +1,4 @@
 from django.test import TestCase
-from agreement.models import Period, Country, Company, Negotiator, Agreement
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 
